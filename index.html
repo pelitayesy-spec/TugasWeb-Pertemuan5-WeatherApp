@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weather today</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-mood="clear">
+
+  <!-- Bentuk lembut di latar belakang (kabut / awan blur) -->
+  <div class="sky" aria-hidden="true">
+    <span class="blob blob--a"></span>
+    <span class="blob blob--b"></span>
+    <span class="blob blob--c"></span>
+  </div>
+
+  <main class="page">
+
+    <!-- Baris atas: label, tanggal, toggle satuan -->
+    <header class="topline">
+      <div>
+        <p class="tag">Weather today</p>
+        <p class="dateline" id="dateline"></p>
+      </div>
+
+      <div class="unit-toggle" role="group" aria-label="Temperature unit">
+        <button type="button" class="unit-btn is-active" data-unit="c" aria-pressed="true">°C</button>
+        <button type="button" class="unit-btn" data-unit="f" aria-pressed="false">°F</button>
+      </div>
+    </header>
+
+    <!-- Pencarian -->
+    <form class="search" id="search-form" autocomplete="off">
+      <label class="visually-hidden" for="city-input">City name</label>
+      <input id="city-input" type="text" placeholder="Search another city…" enterkeyhint="search">
+      <button type="submit" class="search-btn" id="search-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.5"></circle>
+          <path d="M16 16l4 4"></path>
+        </svg>
+        <span class="spinner" aria-hidden="true"></span>
+      </button>
+    </form>
+
+    <!-- Riwayat pencarian -->
+    <div class="history" id="history" hidden>
+      <span class="history-label">Recent</span>
+      <div class="history-list" id="history-list"></div>
+      <button type="button" class="history-clear" id="history-clear">Clear</button>
+    </div>
+
+    <!-- Loading / error -->
+    <div class="status" id="status" aria-live="polite" hidden>
+      <p class="status-title" id="status-title"></p>
+      <p class="status-text" id="status-text"></p>
+    </div>
+
+    <!-- Cuaca utama -->
+    <section class="result" id="result" hidden>
+      <div class="hero">
+        <h1 class="city" id="city">—</h1>
+        <p class="country" id="country"></p>
+
+        <div class="temp-row">
+          <span class="temp" id="temp">--°</span>
+          <img class="icon" id="icon" alt="" width="168" height="168">
+        </div>
+
+        <p class="condition" id="condition"></p>
+        <p class="feels" id="feels"></p>
+      </div>
+
+      <ul class="facts">
+        <li class="fact fact--humidity">
+          <span class="fact-label">Humidity</span>
+          <span class="fact-value" id="humidity">--</span>
+          <span class="meter" id="meter" aria-hidden="true"></span>
+        </li>
+        <li class="fact fact--wind">
+          <span class="fact-label">Wind</span>
+          <span class="fact-value" id="wind">--</span>
+        </li>
+        <li class="fact fact--pressure">
+          <span class="fact-label">Pressure</span>
+          <span class="fact-value" id="pressure">--</span>
+        </li>
+        <li class="fact fact--daylight">
+          <span class="fact-label">Sunrise and sunset</span>
+          <span class="fact-value" id="daylight">--</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Forecast 5 hari -->
+    <section class="forecast" id="forecast-section" hidden>
+      <h2 class="forecast-title">The next five days</h2>
+      <ol class="forecast-list" id="forecast-list"></ol>
+    </section>
+
+    <footer class="credit">Weather data from OpenWeatherMap</footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
